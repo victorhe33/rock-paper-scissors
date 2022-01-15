@@ -1,5 +1,5 @@
 //start coding bro
-//Set variables
+//Set variables including game counters, selections.
 let playerSelection = "";
 let computerSelection = "";
 let playerScore = 0;
@@ -7,7 +7,8 @@ let computerScore = 0;
 let gamesPlayed = 0;
 let numberGames = 5;
 
-//Function simulating computer play: randomly return "Rock", "Paper", or "Scissors".
+/* Function simulating computer play: randomly selects "Rock", "Paper",
+or "Scissors". */
 function computerPlay() {
   let randomNum = Math.floor(Math.random() * 3);
   // console.log(randomNum);
@@ -28,7 +29,7 @@ function playRound() {
   computerPlay();
   gamesPlayed += 1;
 
-//game logic
+//Logic for single round of game
   if (playerSelection == computerSelection) {
 
     alert("You are tied!");
@@ -45,19 +46,16 @@ function playRound() {
   }
 }
 
-//function to play # games
+//function to play selected number of games
 function game () {
   for (i = 1; i <= numberGames; i++) {
     playRound();
-    // console.log(playRound());
-    // console.log(gamesPlayed);
-    // console.log(playerScore);
-    // console.log(computerScore);
   }
 
   return winLogic();
 }
 
+//logic function to announce winner at end of all rounds.
 function winLogic() {
   if (playerScore > computerScore) {
     return `After ${gamesPlayed} rounds... You have won!`;
@@ -68,7 +66,7 @@ function winLogic() {
   }
 }
 
-//Start Function
+//User selection function
 function playerChoice() {
   playerSelection = prompt("Type Rock, Paper, or Scissors", "Type here...")
 
@@ -78,7 +76,7 @@ function playerChoice() {
   let cleanPlayerSelection = playerFirstLet + playerRemainLet;
   playerSelection = cleanPlayerSelection;
 
-  //Make sure selection is valid
+  //confirm user seleciton is valid
   if (playerSelection === "Rock" 
   || playerSelection === "Paper" 
   || playerSelection === "Scissors") {
@@ -91,6 +89,7 @@ function playerChoice() {
   }
 }
 
+//initiate game start via alert upon loading.
 alert(game());
 
 
