@@ -6,7 +6,6 @@ let playerScore = 0;
 let computerScore = 0;
 let gamesPlayed = 0;
 let numberGames = 5;
-// let tieCounter = 0;
 
 /* Function simulating computer play: randomly selects "Rock", "Paper",
 or "Scissors". */
@@ -23,7 +22,7 @@ function computerPlay() {
     computerSelection = "Scissors";
   }
   //display computer selection
-  computer.textContent = (`Computer plays ${computerSelection}`);
+  computer.textContent = (`${computerSelection}`);
 }
 
 //Function to play a round of RPS.
@@ -38,7 +37,7 @@ function playRound(id) {
   playerSelection = cleanPlayerSelection;
 
   //display player selection
-  player.textContent = (`Player plays ${playerSelection}`)
+  player.textContent = (`${playerSelection}`)
   computerPlay();
 
   gamesPlayed += 1;
@@ -54,8 +53,6 @@ function playRound(id) {
 //Logic for single round of game
 function roundLogic() {
   if (playerSelection == computerSelection) {
-    // tieCounter += 1;
-    // tieCounterDisplay.textContent = tieCounter;
     resultDisplay.textContent = ("You are tied!");
 
   } else if (playerSelection == "Rock" && computerSelection == "Scissors"
@@ -73,16 +70,6 @@ function roundLogic() {
   }
 }
 
-// //function to play selected number of games
-// function game () {
-//   // for (i = 1; i <= numberGames; i++) {
-//     playRound();
-//   // }
-
-//   return winLogic();
-// }
-
-//logic function to announce winner at end of all rounds.
 function winLogic() {
   if (playerScore > computerScore) {
     resultDisplay.textContent = `After ${gamesPlayed} rounds... You have won!`;
@@ -91,48 +78,56 @@ function winLogic() {
   } else {
     resultDisplay.textContent = `After ${gamesPlayed} rounds... You have a tie game!`;
   }
+
+  resetButton.classList.remove('hidden');
 }
 
-//User selection function
-// function playerChoice(id) {
-//   playerSelection = id;
-//   console.log(`Player selects ${playerSelection}`);
+function resetGame() {
+  playerSelection = "";
+  playerDisplay.textContent = "Your move";
+  computerSelection = "";
+  computerDisplay.textContent = "";
+  playerScore = 0;
+  playerScoreDisplay.textContent = 0;
+  computerScore = 0;
+  computerScoreDisplay.textContent = 0;
+  gamesPlayed = 0;
+  roundCounterDisplay.textContent = 0;
+  numberGames = 5;
+  resultDisplay.textContent = "Result"
 
-  // if (playerSelection === null) {
-  //   playerChoice();
-  // }
-
-  // //confirm user selection is valid
-  // if (playerSelection === "Rock" 
-  // || playerSelection === "Paper" 
-  // || playerSelection === "Scissors") {
-
-  //   return;
-  // } else {
-
-  //   alert("Invalid selection... Try Again!");
-  //   playerChoice();
-  // }
-// }
-
-//initiate game start via alert upon loading.
-// alert(game());
+  resetButton.classList.add('hidden');
+}
 
 //buttons setup
 const button = document.querySelectorAll('.button');
 button.forEach(button => button.addEventListener('click', buttonClicked));
+button.forEach(button => button.addEventListener("transitionend", transitionEnd))
+const resetButton = document.querySelector('#reset')
 
 function buttonClicked (e) {
   let id = e.target.id;
   
+  const selectedButton = document.querySelector(`#${id}`);
+  selectedButton.classList.add("playing");
+  
+  if (id === "reset") {
+    resetGame();
+    return;
+  }
+  
   if (gamesPlayed < numberGames) {
     playRound(id);
   }
+   
+}
+
+function transitionEnd (e) {
+  this.classList.remove("playing");
 }
 
 //Div Displays
 const roundCounterDisplay = document.querySelector('#round-counter');
-// const tieCounterDisplay = document.querySelector('#tie-counter');
 const playerScoreDisplay = document.querySelector('#player-score');
 const computerScoreDisplay = document.querySelector('#computer-score');
 const playerDisplay = document.querySelector('#player');

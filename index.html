@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="style.css">
-  <title>Document</title>
+  <title>Rock-Paper-Scissors</title>
 </head>
 <body>
 <div class="body-container">
@@ -17,19 +17,24 @@
 
   <div class="score-container">
     <div>Player:<span id="player-score">0</span></div>
-    <div>Round <span id="round-counter">1</span></div>
+    <div>Game <span id="round-counter">1</span></div>
     <!-- <div>Ties:<span id="tie-counter">0</span></div> -->
-    <div>Computer:<span id="computer-score">0</span></div>
+    <div>Robot:<span id="computer-score">0</span></div>
   </div>
-  <div id="player" class="player">Player</div>
-  <div id="computer" class="computer">Computer</div>
-  <div id="result" class="result">Result</div>
+  
+  <div class="move-container">
+    <div id="player" class="player">Your move</div>
+    <div id="computer" class="computer"></div>
+  </div>
 
   <div class="selection-container">
     <button id="rock" class="button">Rock</button>
     <button id="paper" class="button">Paper</button>
     <button id="scissors" class="button">Scissors</button>
   </div>
+
+  <div id="result" class="result">Result</div>
+  <button id="reset" class="button hidden">Reset</button>
 
 </div>
 </body>
